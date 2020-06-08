@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title> Ayo Adekunle's Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="intro">
+            <h1>Ayo Adekunle</h1>
+            <p>Computer Science student at Fisk University, Nashville, Tennessee</p>
+            <h2>About Me</h2>
+            <p>
+                I was born and raised in Nigeria but now I live in Nashville 
+                (This is the first time i travelled out of my country). 
+                I spend a lot of time by myself and listen to an unhealthy amount of music.
+                I am currently a rising Junior in college trying to become a software engineer.
+                I play a lot of video games during and I can sing (don't tell anyone)
+            </p>
+            <h2>Projects</h2>
+            <p>
+                <ul>
+                    <li>Google Ads LegoML Insights engine UI: worked using Angular(HTML, CSS, JavaScript, Python)</li>
+                    <li>Made my own version of games using Python, Java, and a lot of documentation</li>
+                    <li> Other stuff in the works. </li>
+                </ul>
+            </p>
+            <h2>Connect</h2>
+            <ul>
+                <li><a href="https://github.com/ayoadekunle" target="_blank">Github</a></li>
+                <li>
+                    <a href="https://www.linkedin.com/in/ayomide-adekunle-133a59172/" 
+                        target="_blank">LinkedIn</a>
+                </li>
+            </ul>
+
+        <h2>Gallery</h2>
+        <p>I don't take a lot of pictures but this is what i look like</p>
+        <img src="../images/30136.jpg" alt="me" width="200" height="400">
+
+            <p>Click here to get a fact about me</p>
+            <button onclick="addRandomFact()">Click Me!</button>
+            <div id="fact-container"></div>
+        </div>
+    </body>
 </html>
