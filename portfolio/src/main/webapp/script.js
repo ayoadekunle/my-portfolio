@@ -13,11 +13,14 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random text to the page.
  */
 function addRandomFact() {
   const facts =
-      ['I love music!', 'I do not like pictures', '我不会说中文', 'I have two siblings'];
+      ['I\'ve only travelled out of my country once (for college)', 
+       'I speak two langueges', 'My name means "My Joy has arrived" in Yoruba', 
+       'I was born and raised in Nigeria', 'I\'m a good singer', 
+       'I have two siblings'];
 
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
@@ -27,8 +30,20 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-function printHelloMessage() {
-    fetch('/data').then(response => response.text()).then((message) => {
-        document.getElementById('message-container').innerText = message;
-    });
+function getUserComments() {
+    fetch('/data').then(response => response.json()).then((jsonComments) => {
+        // I guess this is where I send the comments to the page
+        console.log(jsonComments);
+
+        const historyEl = document.getElementById('history');
+        for(var i = 0; i < jsonComments.length; i++){
+            historyEl.appendChild(createListElement(jsonComments[i]))  
+        }
+    })
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }

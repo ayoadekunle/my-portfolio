@@ -4,46 +4,192 @@
         <meta charset="UTF-8">
         <title> Ayo Adekunle's Portfolio</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <script src="script.js"></script>
+
+        <!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "pie",
+					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+					"labelRadiusField": "category",
+					"alphaField": "column-1",
+					"descriptionField": "category",
+					"titleField": "category",
+					"valueField": "column-1",
+					"theme": "light",
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"align": "center",
+						"markerType": "circle"
+					},
+					"titles": [],
+					"dataProvider": [
+						{
+							"category": "Computer Geek",
+							"column-1": "40"
+						},
+						{
+							"category": "Gamer",
+							"column-1": "20"
+						},
+						{
+							"category": "Music Lover",
+							"column-1": "20"
+						},
+						{
+							"category": "Loner",
+							"column-1": "10"
+						},
+						{
+							"category": "Cinephile",
+							"column-1": "10"
+						}
+					]
+				}
+			);
+		</script>
     </head>
-    <body>
+
+    <body onload="getUserComments()">
+
+        <ul id="nav-bar">
+            <li id="nav-element" class="title">Ayo Adekunle</li>
+            <li id="nav-element"><a href="#about">About Me</a></li>
+            <li id="nav-element"><a href="#career">Career</a></li>
+            <li id="nav-element"><a href="">Media</a></li>
+            <li id="nav-element"><a href="#connect">Connect</a></li>
+        </ul>
+
         <div id="intro">
-            <h1>Ayo Adekunle</h1>
-            <p>Computer Science student at Fisk University, Nashville, Tennessee</p>
-            <h2>About Me</h2>
-            <p>
-                I was born and raised in Nigeria but now I live in Nashville 
-                (This is the first time i travelled out of my country). 
-                I spend a lot of time by myself and listen to an unhealthy amount of music.
-                I am currently a rising Junior in college trying to become a software engineer.
-                I play a lot of video games during and I can sing (don't tell anyone)
+            <h3>Hi, I'm Ayo.</h3>
+            <a class="button" href="#about"><span>More</span></a>
+        </div>
+
+        <div id="about">
+            <p class="header">About Me</p>
+            <p class="content">
+                My name is Ayomide David Adekunle and I'm a college junior majoring in 
+                Computer Science at <a href="https://www.fisk.edu">Fisk University</a>, 
+                Nashville, Tennessee.
             </p>
-            <button onclick="printHelloMessage()">Say Hi to Me!</button>
-            <div id="message-container"></div>
-            <h2>Projects</h2>
-            <p>
-                <ul>
-                    <li>Google Ads LegoML Insights engine UI: worked using Angular(HTML, CSS, JavaScript, Python)</li>
-                    <li>Made my own version of games using Python, Java, and a lot of documentation</li>
-                    <li> Other stuff in the works. </li>
-                </ul>
-            </p>
-            <h2>Connect</h2>
+
+            <div id="chartdiv" style="width: 100%; height: 400px; background-color: #E0F0F5;" ></div>
+
+            <p onclick="addRandomFact()" class="button">Click to get a fact about me!</p>
+            <div id="fact-container" class="content"></div>
+        </div>
+
+        <div id="career"> 
+
+            <p class="header">Career</p> 
+            <p class="header2"><img src="../images/education-icon.png" height="25" width="25">  Education</p>
+            <ul><li class="content">B.Sc. Computer Science, Fisk University, 2018-2020.</li></ul>
+
+            <p class="header2"><img src="../images/job-icon.png" height="25" width="25">  Working Experience</p>
             <ul>
-                <li><a href="https://github.com/ayoadekunle" target="_blank">Github</a></li>
-                <li>
-                    <a href="https://www.linkedin.com/in/ayomide-adekunle-133a59172/" 
-                        target="_blank">LinkedIn</a>
-                </li>
+                <li class="content">Google Engineering Practicum Intern, Google LLC, Summer 2019</li>
+                <li class="content">Google Student Training in Engineering Program (STEP) Intern, Google LLC, Summer 2020</li>
+            </ul>
+            
+            <p class="header2"><img src="../images/skills-icon.png" height="25" width="25">  Skills</p>
+            <ul>
+                <li class="content">Java</li>
+                <li class="content">Python</li>
+                <li class="content">Angular JS</li>
+                <li class="content">HTML/CSS/Javascript</li>
             </ul>
 
-        <h2>Gallery</h2>
-        <p>I don't take a lot of pictures but this is what i look like</p>
-        <img src="../images/30136.jpg" alt="me" width="200" height="400">
+            <p class="header2"><img src="../images/projects-icon.png" height="25" width="25">  Projects</p>
+            <ul>
+                <li class="content">
+                    Google Ads LegoML Insights engine UI: Insights Engine is a metadata repository 
+                    for all the Google Ads data sources and machine learning model training pipelines.
+                </li>
+                <li class="content">Made my own version of games using Python, Java, and a lot of documentation</li>
+                <li class="content"> Other stuff in the works. </li>
+            </ul>
+        </div>
+<!--
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Intro to Post Requests</title>
+    </head>
+    <body>
+        <h1>Intro to Post Requests</h1>
 
-            <p>Click here to get a fact about me</p>
-            <button onclick="addRandomFact()">Click Me!</button>
-            <div id="fact-container"></div>
+        <p>This is a form that sends a POST request to the server:</p>
+        <form action="/my-data-url" method="POST">
+
+        <input type="text" name="name-input" placeholder="Your Name"/>
+        <br/><br/>
+
+        <select name="color-input">
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+        </select>
+        <br/><br/>
+
+        <textarea name="description-input" placeholder="Your Description"></textarea>
+        <br/><br/>
+
+        <input type="submit"/>
+        </form>
+
+        <div id="results"></div>
+    </body>
+    </html>
+-->
+        <div id="comments">
+            <p class="header">Comments</p>
+            <ul id="history"></ul>
+
+            <div id="input">
+                <form action="/data" method="POST">
+                    <input type="text" name="user-comment" placeholder="Make Comments Here"/>
+                    <br/>
+                    <input type="submit"/>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="connect">
+            <p class="header">Connect with Me</p>
+            <ul>
+                <li>
+                    <a href="https://github.com/ayoadekunle" target="_blank" class="button">
+                        <img src="../images/git-icon.png" height="80" width="80">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/ayomide-adekunle-133a59172/" target="_blank" class="button">
+                        <img src="../images/linkedin-icon.png" height="80" width="80">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://open.spotify.com/user/qgt7g7xfbroaqg7u64l4vk7ag?si=Xcxe6dVETH-7ehLk8zGLPQ" target="_blank" class="button">
+                        <img src="../images/spotify-icon.png" height="80" width="80">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/nigerian.dream/" target="_blank" class="button">
+                        <img src="../images/instagram-icon.png" height="80" width="80">
+                    </a>
+                </li>
+            </ul>
         </div>
     </body>
 </html>
