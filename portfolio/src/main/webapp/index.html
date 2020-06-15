@@ -5,58 +5,13 @@
         <title> Ayo Adekunle's Portfolio</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <script src="script.js"></script>
 
         <!-- amCharts javascript sources -->
-		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-		<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
-		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-		
-		<!-- amCharts javascript code -->
-		<script type="text/javascript">
-			AmCharts.makeChart("chartdiv",
-				{
-					"type": "pie",
-					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
-					"labelRadiusField": "category",
-					"alphaField": "column-1",
-					"descriptionField": "category",
-					"titleField": "category",
-					"valueField": "column-1",
-					"theme": "light",
-					"allLabels": [],
-					"balloon": {},
-					"legend": {
-						"enabled": true,
-						"align": "center",
-						"markerType": "circle"
-					},
-					"titles": [],
-					"dataProvider": [
-						{
-							"category": "Computer Geek",
-							"column-1": "40"
-						},
-						{
-							"category": "Gamer",
-							"column-1": "20"
-						},
-						{
-							"category": "Music Lover",
-							"column-1": "20"
-						},
-						{
-							"category": "Loner",
-							"column-1": "10"
-						},
-						{
-							"category": "Cinephile",
-							"column-1": "10"
-						}
-					]
-				}
-			);
-		</script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <script src="script.js"></script>
+        
     </head>
 
     <body onload="getUserComments()">
@@ -125,7 +80,7 @@
 
             <div id="input">
                 <form action="/data" method="POST">
-                    <input type="text" name="user-comment" placeholder="Make Comments Here"/>
+                    <input type="text" name="user-comment" placeholder="Make Comments Here" autocomplete="off"/>
                     <br/>
                     <input type="submit"/>
                 </form>

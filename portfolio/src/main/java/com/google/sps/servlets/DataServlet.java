@@ -53,6 +53,9 @@ public class DataServlet extends HttpServlet {
     // Add comment to the comments list.
     comments.add(userComment);
 
+    //Redirect back to the HTML page.
+    response.sendRedirect("/index.html#comments");
+
     Entity commentEntity = new Entity("Comment");
     //commentEntity.setProperty("commenter", commenter);
     commentEntity.setProperty("userComment", userComment);
@@ -61,8 +64,6 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    //Redirect back to the HTML page.
-    response.sendRedirect("/index.html#comments");
   }
 
   private String convertToJsonUsingGson(ArrayList<String> list) {
