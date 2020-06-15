@@ -132,6 +132,11 @@ body {
     padding: 16px 32px;
 }
 
+#connect img {
+    height: 60px;
+    width: 60px;
+}
+
 #about {
     background-color: #E0F0F5;
     text-align: center;
@@ -198,6 +203,11 @@ body {
     padding: 18px 24px;
     padding-bottom: 0;
     margin: 0;
+}
+
+#career .header2 img{
+    height: 25px;
+    width: 25px;
 }
 
 #career ul {
@@ -273,6 +283,7 @@ body {
     transition: 0.3s;
     font-size: 16px;
     font-family: Raleway, serif;
+    outline: none;
 }
 
 #comments input[type=submit]:hover {

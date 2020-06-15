@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -38,21 +41,28 @@ public class DataServlet extends HttpServlet {
     
     //Converting the comments list to JSON
     String jsonComments = convertToJsonUsingGson(comments);
-    
     response.setContentType("application/json;");
     response.getWriter().println(jsonComments);
   }
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-      // Get input from the form.
-      String userComment = request.getParameter("user-comment");
+    // Get input from the form.
+    String userComment = request.getParameter("user-comment");
 
-      // Add comment to the comments list.
-      comments.add(userComment);
+    // Add comment to the comments list.
+    comments.add(userComment);
 
-      //Redirect back to the HTML page.
-      response.sendRedirect("/index.html#comments");
+    Entity commentEntity = new Entity("Comment");
+    //commentEntity.setProperty("commenter", commenter);
+    commentEntity.setProperty("userComment", userComment);
+
+    // Make a Datastore.
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
+    //Redirect back to the HTML page.
+    response.sendRedirect("/index.html#comments");
   }
 
   private String convertToJsonUsingGson(ArrayList<String> list) {
