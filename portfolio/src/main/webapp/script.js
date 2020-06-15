@@ -32,8 +32,6 @@ function addRandomFact() {
 
 function getUserComments() {
     fetch('/data').then(response => response.json()).then((jsonComments) => {
-        // I guess this is where I send the comments to the page
-        console.log(jsonComments);
 
         const historyEl = document.getElementById('history');
         for(var i = 0; i < jsonComments.length; i++){
