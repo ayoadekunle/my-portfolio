@@ -31,19 +31,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  public ArrayList<String> comments;
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
-  public void init() {
-    comments = new ArrayList<>();  
-  }
-
-  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
+    ArrayList<String> comments = new ArrayList<>();
     // Create a query instance with an entity type
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
@@ -61,10 +56,12 @@ public class DataServlet extends HttpServlet {
 
     // Get input from the form.
     String userComment = request.getParameter("user-comment");
+    long timestamp = System.currentTimeMillis();
 
     // Create entities to store in datastore
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("userComment", userComment);
+    commentEntity.setProperty("timestamp", timestamp);
 
     // Store the comments entity in the datastore.
     datastore.put(commentEntity);
