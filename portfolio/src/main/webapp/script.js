@@ -32,10 +32,13 @@ function addRandomFact() {
 
 function getUserComments() {
     fetch('/data').then(response => response.json()).then((jsonComments) => {
+        
+        console.log(jsonComments);
 
         const historyEl = document.getElementById('history');
+        historyEl.innerHTML = "";
         for(var i = 0; i < jsonComments.length; i++){
-            historyEl.appendChild(createListElement(jsonComments[i]))  
+            historyEl.appendChild(createListElement(jsonComments[i])); 
         }
     })
 }
