@@ -13,7 +13,9 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
-
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -29,16 +31,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  public ArrayList<String> comments;
-
-  @Override
-  public void init() {
-    comments = new ArrayList<>();  
-  }
+  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
+    ArrayList<String> comments = new ArrayList<>();
+    // Create a query instance with an entity type
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+        String comment = (String) entity.getProperty("userComment");
+        comments.add(comment);
+    }
+
     //Converting the comments list to JSON
     String jsonComments = convertToJsonUsingGson(comments);
     response.setContentType("application/json;");
@@ -49,21 +56,18 @@ public class DataServlet extends HttpServlet {
 
     // Get input from the form.
     String userComment = request.getParameter("user-comment");
+    long timestamp = System.currentTimeMillis();
 
-    // Add comment to the comments list.
-    comments.add(userComment);
+    // Create entities to store in datastore
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("userComment", userComment);
+    commentEntity.setProperty("timestamp", timestamp);
+
+    // Store the comments entity in the datastore.
+    datastore.put(commentEntity);
 
     //Redirect back to the HTML page.
     response.sendRedirect("/index.html#comments");
-
-    Entity commentEntity = new Entity("Comment");
-    //commentEntity.setProperty("commenter", commenter);
-    commentEntity.setProperty("userComment", userComment);
-
-    // Make a Datastore.
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
-
   }
 
   private String convertToJsonUsingGson(ArrayList<String> list) {
