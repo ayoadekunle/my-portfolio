@@ -68,7 +68,6 @@ public class DataServlet extends HttpServlet {
 
     //Redirect back to the HTML page.
     response.sendRedirect("/index.html#comments");
-
   }
 
   private String convertToJsonUsingGson(ArrayList<String> list) {
