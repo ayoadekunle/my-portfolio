@@ -286,11 +286,32 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 16px;
+    font-size: 18px;
     font-family: Raleway, serif;
     outline: none;
 }
 
 #comments input[type=submit]:hover {
-    background-color: #406340;
+    background-color: #F3F7F3;
+    color: #304A30;
+}
+
+#comments select{
+    background-color: #304A30;
+    border: 2px solid #F3F7F3;
+    border-radius: 4px;
+    color: #F3F7F3;
+    padding: 12px 24px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 18px;
+    font-family: Raleway, serif;
+    outline: none;
+}
+
+#comments select:hover{
+    background-color: #F3F7F3;
+    color: #304A30;
 }
