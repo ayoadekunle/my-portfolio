@@ -13,6 +13,10 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -36,13 +40,14 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ArrayList<String> comments = new ArrayList<>();
+
     // Create a query instance with an entity type
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-        String comment = (String) entity.getProperty("userComment");
+        String comment = (String) entity.getProperty("translatedText");
         comments.add(comment);
     }
 
@@ -56,11 +61,19 @@ public class DataServlet extends HttpServlet {
 
     // Get input from the form.
     String userComment = request.getParameter("user-comment");
+    String languageCode = request.getParameter("languageCode");
     long timestamp = System.currentTimeMillis();
+
+    //Translate the comment
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+    Translation translation =
+        translate.translate(userComment, Translate.TranslateOption.targetLanguage(languageCode));
+    String translatedText = translation.getTranslatedText();
 
     // Create entities to store in datastore
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("userComment", userComment);
+    commentEntity.setProperty("translatedText", translatedText);
     commentEntity.setProperty("timestamp", timestamp);
 
     // Store the comments entity in the datastore.
